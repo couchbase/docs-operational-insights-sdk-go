@@ -1,0 +1,104 @@
+= {name-sdk} {sdk_dot_minor}
+:page-layout: landing-page-top-level-sdk
+:page-role: tiles
+:!sectids:
+
+
+= Go Insights SDK {sdk_dot_minor}
+
+The Insights Go SDK allows you to connect to an xref:entreprise-analytics:intro:intro.adoc[Operational Insights] cluster from Go.
+For connecting to a Couchbase Server Cluster -- self-managed, or Capella Operational --
+see our xref:go-sdk:hello-world:overview.adoc[Go Operational SDK].
+
+TIP: Connecting to an xref:columnar:intro:intro.adoc[Operational Insights _Capella_] cluster from Go currently requires a xref:go-columnar-sdk:hello-world:overview.adoc[Go Columnar SDK].
+
+{empty} +
+
+== icon:database[] Using Your Operational Insights Cluster
+
+How-to guides and tutorials to help you start your development journey with Operational Insights and the Go SDK.
+
+++++
+<div class="card-row three-column-row">
+++++
+
+[.column]
+.Getting Started
+* xref:hello-world:start-using-sdk.adoc[]
+* xref:howtos:managing-connections.adoc[Connecting to Operational Insights]
+* xref:howtos:sqlpp-queries-with-sdk.adoc[]
+
+
+
+////
+[.column]
+.Managing Couchbase
+* xref:howtos:managing-connections.adoc[]
+* xref:howtos:sdk-authentication.adoc[]
+* xref:howtos:provisioning-cluster-resources.adoc[]
+* xref:howtos:sdk-user-management-example.adoc[]
+
+[.column]
+.Errors & Diagnostics
+* xref:howtos:error-handling.adoc[]
+* xref:howtos:collecting-information-and-logging.adoc[]
+* xref:howtos:slow-operations-logging.adoc[]
+
+++++
+</div>
+++++
+
+== icon:graduation-cap[] Learn
+
+Take a deep-dive into the SDK concept material and learn more about Couchbase and Operational Insights.
+
+++++
+<div class="card-row three-column-row">
+++++
+
+[.column]
+.Data Concepts
+* xref:concept-docs:data-model.adoc[]
+* xref:concept-docs:data-services.adoc[Service Selection]
+* xref:concept-docs:encryption.adoc[Field Level Encryption]
+
+[.column]
+.Errors & Diagnostics Concepts
+* xref:concept-docs:errors.adoc[]
+* xref:concept-docs:response-time-observability.adoc[]
+* xref:concept-docs:durability-replication-failure-considerations.adoc[]
+
+++++
+</div>
+++++
+
+== icon:book[] Resources
+
+Useful resources to help support your development experience with Operational Insights and the Go SDK.
+
+++++
+<div class="card-row three-column-row">
+++++
+////
+
+
+
+
+
+
+[.column]
+.Reference
+* {sdk-api-link}[API Reference]
+* xref:ref:client-settings.adoc[]
+* xref:ref:error-codes.adoc[]
+* xref:ref:glossary.adoc[Glossary]
+
+[.column]
+.Deployment Docs
+* xref:project-docs:analytics-sdk-release-notes.adoc[]
+* xref:project-docs:compatibility.adoc[Compatibility]
+* xref:project-docs:sdk-full-installation.adoc[]
+
+++++
+</div>
+++++

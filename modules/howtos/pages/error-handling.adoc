@@ -1,0 +1,49 @@
+= Handling Errors
+:description: Errors are inevitable. The developer’s job is to be prepared for whatever is likely to come up
+
+[abstract]
+{description} -- and to try and be prepared for anything that conceivably could come up.
+
+The Go SDK works nicely with the https://golang.org/pkg/errors/[`errors` package] to interrogate errors.
+Of course, you can also just log them and fail the operation.
+
+== Using `errors.As`
+
+All errors from the Go SDK that occur from an interaction with the server have `AnalyticsError` in the error chain.
+This error indicates a client-server interaction failed. Specifically, it indicates a request could not be dispatched, a response was not received, or the response indicated an error.
+
+[source,go]
+----
+include::devguide:example$errors.go[tags=analyticsError]
+----
+
+The SDK also exposes a `QueryError` type, which wraps `AnalyticsError` and exposes more information about the query context.
+Specifically, this error allows access to the error code and message returned directly from the query engine.
+This error only occurs when the query engine is attempting to execute a query.
+
+[source,go]
+----
+include::devguide:example$errors.go[tags=queryError]
+----
+
+== Using `errors.Is`
+
+Errors in the Go SDK primarily fall into a small number of categories:
+
+- `ErrAnalytics` -- Occurs when a client-server interaction fails. This will be the base error if no more specific error is detected.
+- `ErrQuery` -- Occurs when a server error is encountered while executing a query, excluding errors that fall into `ErrInvalidCredential` or `ErrTimeout`.
+- `ErrInvalidCredential` -- Occurs when the credentials provided to the server are invalid. This can be returned by `ExecuteQuery` if SDK bootstrapping fails or be returned from the query engine.
+- `ErrTimeout` -- Occurs when a query times out on the server.
+- Other - this includes platform errors and SDK errors like `ErrInvalidArgument`
+
+== Timeouts
+
+Timeouts are a common source of errors in distributed systems.
+The Go SDK exposes timeouts in two ways, depending on the `context.Context` provided to the operation.
+
+If the `context.Context` provided to `ExecuteQuery` contains a `Deadline` then the timeout is controlled by the context.
+If a timeout occurs in this case, then it will be returned as a `context.DeadlineExceeded` error.
+Note: the `context.CancelFunc` is also respected, if the `Context` is canceled then a `context.Canceled` error will be returned.
+
+If there is no `Deadline` specified on the `Context` then the SDK will apply the timeout specified by the `QueryTimeout` from `ClusterOptions`.
+If a timeout occurs in this case, then it will be returned as an `ErrTimeout` error.

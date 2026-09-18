@@ -1,0 +1,32 @@
+= Reference Pages
+:page-toclevels: 2
+:description: Essential reference infomation for developing with Operational Insights.
+
+
+// Note to editors
+// 
+// This page pulls in content from -sdk-common-
+// and code samples from -example-dir-
+// 
+// It can be seen built at https://docs.couchbase.com/  .......................................
+
+[abstract]
+{description}
+
+
+This section contains the following reference docs:
+
+* {sdk-api-link}[API Reference^]
+* xref:ref:client-settings.adoc[]
+* xref:ref:error-codes.adoc[Error Code Reference]
+* xref:ref:glossary.adoc[Glossary]
+
+
+
+
+////
+External links.
+
+Discussion / Concept /  Understanding
+docs.
+////

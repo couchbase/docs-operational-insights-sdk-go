@@ -1,0 +1,129 @@
+= Querying with {sqlpp}
+:description: You can query for documents in Couchbase using the {sqlpp} query language -- a language based on SQL, but designed for structured and flexible JSON documents.
+:page-toclevels: 2
+
+
+[abstract]
+{description}
+
+
+
+On this page we dive straight into using the Query Service API from the {name-sdk}.
+For a deeper look at the concepts, to help you better understand the Query Service, and the {sqlpp} language, see the links in the <<further-information,Further Information>> section at the end of this page.
+
+
+// Here we show queries against the Travel Sample collection, at cluster and scope level,
+// and give links to information on adding other collections to your data.
+// kafka
+// postgres
+// capella
+
+
+== Before You Start
+
+This page assumes that you have xref:hello-world:start-using-sdk.adoc[installed the {name-sdk}], added your IP address to the allowlist, and xref:analytics:manage:manage-nodes/create-cluster.adoc#cluster[created an Insights Enterprise cluster].
+
+Create a collection to work upon by xref:analytics:intro:connecting-to-data-sources.adoc#import-the-travel-sample-collections[importing the travel-sample dataset] into your cluster.
+
+
+== Querying Your Dataset
+
+[TIP]
+.API Enhancements & Async
+====
+The 2.2 Operational Insights Enterprise Cluster introduced support for JWT and client certificate authentication, as well as a new poll-based {async-server-api-feature-name} that uses request handles to fetch results.
+This API eliminates the need for long-running server connections.
+
+The examples in this first section of the page are for the standard API, working with all releases of Operational Insights (with {async-server-api-feature-name} examples following in the <<#server-asynchronous-api,Server Async section>>).
+Note, you can still use this API with 2.2+ releases of Operational Insights, in addition to the new API.
+====
+
+
+Execute a query and print all rows:
+
+[source,golang]
+----
+include::devguide:example$queries.go[tags=scopeLevelQuery]
+----
+
+.Cluster Level
+[source,golang]
+----
+include::devguide:example$queries.go[tags=clusterLevelQuery]
+----
+
+
+=== Positional and Named Parameters
+
+Supplying parameters as individual arguments to the query allows the query engine to optimize the parsing and planning of the query. You can either supply these parameters by name or by position.
+
+Execute a streaming query with positional arguments:
+
+.Positional Parameters
+[source,golang]
+----
+include::devguide:example$queries.go[tags=positionalParamQuery]
+----
+
+Execute a streaming query with named arguments:
+
+.Named Parameters
+[source,golang]
+----
+include::devguide:example$queries.go[tags=namedParamQuery]
+----
+
+
+Access query metadata:
+
+.Metadata
+[source,golang]
+----
+include::devguide:example$queries.go[tags=metadata]
+----
+
+
+
+[[#server-asynchronous-api]]
+== {async-server-api-feature-name}
+
+Operational Insights 2.2 added a {async-server-api-feature-name}.
+The SDK will send a request, poll for results, and then fetch once the result is available.
+
+
+.Server Asynchronous API Example
+[source,go]
+----
+include::devguide:example$serverasync.go[indent=0,tag=server-async]
+----
+
+
+
+
+== Query Options
+
+The query service provides an array of options to customize your query.
+The following table lists them all:
+
+.Available Query Options
+[options="header"]
+|====
+| Name       | Description
+| `ClientContextID string` | An optional identifier for the query.
+| `NamedParameters map[string]interface{}` | Allows to set named arguments for a parameterized query.
+| `PositionalParameters []interface{}` | Allows to set positional arguments for a parameterized query.
+| `Raw map[string]interface{}` | Escape hatch to add arguments that are not covered by these options.
+| `ReadOnly bool` | Tells the client and server that this query is readonly.
+| `ScanConsistency QueryScanConsistency` | Sets a different scan consistency for this query.
+| `Unmarshaler Unmarshaler` | Sets a different `Unmarshaler` for this query.
+|====
+
+
+== Further Information
+
+
+The xref:analytics:sqlpp:1_intro.adoc[{sqlpp} for Analytics Reference]
+offers a complete guide to the {sqlpp} language for both of our analytics services, including all of the latest additions.
+
+
+

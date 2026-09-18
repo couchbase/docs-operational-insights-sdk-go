@@ -1,0 +1,16 @@
+= Error Messages
+:description: The standardized error codes returned by the Go Operational Insights SDK, from cluster connection to {sqlpp} query.
+:nav-title: Error Codes
+
+[abstract]
+{description}
+
+// include::{version-common}@sdk:shared:partial$error-ref.adoc[tag=intro]
+
+// include::{version-common}@analytics-sdk:shared:partial$error-ref.adoc[tag=intro]
+
+
+
+The {name-sdk} passes through the Analytics error codes from Enterprise Analytics.
+
+For a full list of error codes, see xref:{version-server}@server:analytics:error-codes.adoc[Analytics ServiceError Codes].

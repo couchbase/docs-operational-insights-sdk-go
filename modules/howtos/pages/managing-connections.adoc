@@ -1,0 +1,107 @@
+= Managing Connections
+:description: This section describes how to connect the {name-sdk} to an Operational Insights cluster.
+:page-toclevels: 2
+
+
+// Note to editors
+// 
+// This page pulls in content from -sdk-common-
+// and code samples from -example-dir-
+// 
+// It can be seen built at wwww.
+
+
+[abstract]
+{description}
+It contains best practices as well as information on TLS/SSL and advanced connection options.
+
+
+Our xref:hello-world:start-using-sdk.adoc[Getting Started pages] cover the basics of making a connection to an Operational Insights cluster.
+This page is a wider look at the topic.
+
+
+== Connecting to a Cluster
+
+
+A connection to an Operational Insights cluster is represented by a `Cluster` object.
+A `Cluster` provides access to Buckets and Scopes, as well as various Couchbase services and management interfaces.
+The simplest way to create a `Cluster` object is to call `cbanalytics.Connect()` with a <<connection-strings, connection string>>, username, and password:
+
+[source,golang]
+----
+include::devguide:example$connecting.go[tags=connecting]
+----
+
+////
+NOTE: Capella's root certificate is *not* signed by a well known Certificate Authority.
+However, the certificate is bundled with the SDK, and is automatically trusted unless you specify a different certificate to trust.
+////
+
+
+== Connection Strings
+
+
+include::{version-common}@operational-insights-sdk:shared:partial$connstr.adoc[tag=more-connstr]
+
+
+
+== Authentication by Credential
+
+Similarly to the `Authenticator` abstraction in Couchbase Operational SDKs, Operational Insights SDKs use a `Credential` abstraction covering regular password authentication (Basic Access Authentication), JSON Web Tokens (JWT), and Client Certificates through mTLS.
+
+Basic Access Authentication is shown in the example <<#connecting-to-a-cluster,above>>.
+
+
+=== JSON Web Tokens (JWT)
+
+JWT is supported from OI Server 2.2+.
+
+[source,go]
+----
+var credential = JwtCredential.Create(token);
+public static Cluster Create(string connectionString, ICredential credential);
+----
+
+Typically, JWTs have a short validity period.
+Renew JWTs with `SetCredential(newCredential)`.
+
+
+=== Certificate Authentication
+
+Certificate authentication is supported with Operational Insights Server 2.2+.
+A conceptual and architectural overview of Operational Insights's support of X.509 certificates is provided in the xref:{version-server}@server:learn:security/certificates.adoc[Server certificates docs].
+Practical information on handling certificates can be found in the xref:{version-ea}@enterprise-analytics:manage:manage-security/manage-certificates.adoc[Operational Insights certificates docs].
+
+The Insights SDK authenticates the client during the TLS handshake.
+The SDK reads the certificate and private key from a `PKCS#12` file:
+
+[source,go]
+----
+	opts := gocb.ClusterOptions{
+		Authenticator: gocb.CertificateAuthenticator{
+			ClientCertificate: &cert,
+		},
+	}
+	cluster, err := gocb.Connect("couchbases://--your-ip--", opts)
+	if err != nil {
+		panic(err)
+	}
+----
+
+
+== Certificate Authority
+
+To make a TLS connection to an Operational Insights cluster with a root certificate issued by a trusted CA (Certificate Authority), you do not need to add this to your configuration --
+the platform's defaults are automatically trusted.
+
+The cluster's root certificate just needs to be issued by a CA whose certificate is in your system trust store.
+This includes well known CAs (including GoDaddy and Verisign), plus any other CA certificates that you wish to add.
+
+
+
+== Local Development
+
+
+We strongly recommend that the client and server xref:project-docs:compatibility.adoc#network-requirements[are in the same LAN-like environment] (e.g. AWS Region).
+// As this may not always be possible during development, read the guidance on working with xref:ref:client-settings.adoc#commonly-used-options[constrained network environments].
+// More details on connecting your client code to Couchbase Capella can be found xref:cloud:clouds:connect-an-sdk.adoc#connecting-your-sdk-to-capella[in the Capella Operational docs].

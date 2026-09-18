@@ -1,0 +1,104 @@
+= {name-sdk} Quickstart Guide
+:page-toclevels: 2
+:description: Install, connect, try. A quick start guide to get you up and running with Enterprise Operational Insights and the {name-sdk}.
+
+[abstract]
+{description}
+
+include::analytics-sdk:shared:partial$start-using-sdk.adoc[tag=intro]
+
+
+== Before You Start
+
+
+////
+[tabs]
+==== 
+Capella Analytics::
++
+--
+Sign up for a xref:cloud:get-started:create-account.adoc[Capella account],
+and choose a xref:columnar:intro:intro.adoc[Analytics] cluster.
+
+After creating the cluster, add your IP address to the list of allowed IP addresses.
+// TODO: Link to https://docs.couchbase.com/columnar/admin/ip-allowed-list.html
+--
+
+Self-Managed Enterprise Analytics::
++
+--
+*TODO* links to EA docs
+--
+====
+////
+
+Install and configure an xref:enterprise-analytics:intro:intro.adoc[Operational Insights Enterprise Cluster].
+
+
+=== Minimum Go Version
+
+In line with the Golang project, the {name-sdk} supports both the current, and the previous, versions of Go.
+Earlier versions may work, but are not supported.
+
+
+== Adding the SDK to an Existing Project
+
+Declare a dependency on the SDK using its xref:project-docs:sdk-full-installation.adoc[].
+
+To see log messages from the SDK, xref:howtos:logging.adoc[consult the logging documentation].
+
+
+== Connecting and Executing a Query
+
+
+The 2.2 Operational Insights Enterprise Cluster introduced support for JWT and client certificate authentication, as well as a new poll-based {async-server-api-feature-name} that uses request handles to fetch results.
+This API eliminates the need for long-running server connections.
+
+The examples in this first section of the page are for the standard API, working with all releases of Operational Insights (with {async-server-api-feature-name} examples following in the <<#server-asynchronous-api,Server Async section>>).
+Note, you can still use this API with 2.2+ releases of Operational Insights, in addition to the new API.
+
+
+=== Server Synchronous Request API
+
+[source,go]
+----
+include::devguide:example$helloworld.go[tags=**]
+----
+
+
+
+
+[[#server-asynchronous-api]]
+=== {async-server-api-feature-name}
+
+Operational Insights 2.2 introduced a {async-server-api-feature-name}.
+The SDK sends a request, polls for results, and then fetches once the result is available.
+
+.Server Asynchronous API Example
+[source,go]
+----
+include::devguide:example$serverasync.go[indent=0,tag=server-async]
+----
+
+
+=== Connection String
+
+The `connStr` in the above example should take the form of "https://<your_hostname>:" + PORT 
+
+include::{version-common}@analytics-sdk:shared:partial$connstr.adoc[tag=connstr]
+
+[source,go]
+----
+const (
+		connStr  = "https://analytics.example.com:18095"
+		username = "user"
+		password = "password"
+	)
+----
+
+
+
+
+== Migration from Row-Based Analytics
+
+include::{version-common}@operational-insights-sdk:shared:partial$migration.adoc[tag=migration]
