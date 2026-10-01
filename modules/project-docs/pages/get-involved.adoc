@@ -5,7 +5,7 @@
 == Contributing
 
 Couchbase welcomes community contributions to the Go Operational Insights SDK.
-The https://github.com/couchbase/gocbanalytics[Go Operational Insights SDK source code^] is available on GitHub.
+The https://github.com/couchbase/gocbinsights[Go Operational Insights SDK source code^] is available on GitHub.
 // Please see the 
 // https://github.com/couchbase/couchbase-jvm-clients/blob/master/CONTRIBUTING.md[CONTRIBUTING^] file for further information.
 
