@@ -84,7 +84,7 @@ include::devguide:example$queries.go[tags=metadata]
 
 
 
-[[#server-asynchronous-api]]
+[[server-asynchronous-api]]
 == {async-server-api-feature-name}
 
 Operational Insights 2.2 added a {async-server-api-feature-name}.
