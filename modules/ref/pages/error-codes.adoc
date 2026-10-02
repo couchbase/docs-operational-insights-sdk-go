@@ -5,9 +5,8 @@
 [abstract]
 {description}
 
-// include::{version-common}@sdk:shared:partial$error-ref.adoc[tag=intro]
 
-// include::{version-common}@analytics-sdk:shared:partial$error-ref.adoc[tag=intro]
+// include::{version-common}@operational-insights-sdk:shared:partial$error-ref.adoc[tag=intro]
 
 
 
