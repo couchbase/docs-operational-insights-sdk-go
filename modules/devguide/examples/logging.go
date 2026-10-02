@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/couchbase/gocbanalytics"
+	"github.com/couchbase/gocbinsights"
 	"github.com/sirupsen/logrus"
 )
 
@@ -43,16 +43,16 @@ func logging() {
 	logger.SetOutput(os.Stdout)
 	logger.SetLevel(logrus.DebugLevel)
 
-	opts := cbanalytics.NewClusterOptions().SetLogger(&MyLogrusLogger{logger})
+	opts := cbinsights.NewClusterOptions().SetLogger(&MyLogrusLogger{logger})
 	// #end::creation[]
 
 	connStr := "couchbases://..."
 	username := "..."
 	password := "..."
 
-	cluster, err := cbanalytics.NewCluster(
+	cluster, err := cbinsights.NewCluster(
 		connStr,
-		cbanalytics.NewBasicAuthCredential(username, password),
+		cbinsights.NewBasicAuthCredential(username, password),
 		opts,
 	)
 	handleErr(err)
@@ -70,6 +70,6 @@ func logging() {
 
 func builtInLogger() {
 	// #tag::creationBuiltIn[]
-	cbanalytics.NewClusterOptions().SetLogger(cbanalytics.NewInfoLogger())
+	cbinsights.NewClusterOptions().SetLogger(cbinsights.NewInfoLogger())
 	// #end::creationBuiltIn[]
 }

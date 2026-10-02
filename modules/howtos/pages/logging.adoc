@@ -13,15 +13,15 @@ The Operational Insights Go SDK offers simple logging of library internals to he
 Logging may be configured on a global library-level basis.
 *Note that the logging API is subject to change*.
 
-You can configure logging using the `ClusterOptions.SetLogger` function, which accepts an implementation of [.api]`cbanalytics.Logger`.
+You can configure logging using the `ClusterOptions.SetLogger` function, which accepts an implementation of [.api]`cbinsights.Logger`.
 The SDK comes with three built-in `Logger` implementations which can be used with `SetLogger`:
 
 [[gocb.logger_instantiation_methods]]
-* [.api]`cbanalytics.InfoLogger()` returns a logger with log level set to `Info` which logs errors, warnings, and informational messages.
+* [.api]`cbinsights.InfoLogger()` returns a logger with log level set to `Info` which logs errors, warnings, and informational messages.
 This is fairly non-disruptive and does not produce a lot of output.
-* [.api]`cbanalytics.VerboseLogger()` returns a logger with log level set to `Trace` which logs more detailed tracing information.
+* [.api]`cbinsights.VerboseLogger()` returns a logger with log level set to `Trace` which logs more detailed tracing information.
 This logger should only be used when trying to diagnose an issue.
-* [.api]`cbanalytics.NoopLogger()` returns a logger which does not log any output at all.
+* [.api]`cbinsights.NoopLogger()` returns a logger which does not log any output at all.
 This logger is equivalent to not setting a logger at all.
 
 [source,golang,indent=0]
@@ -30,7 +30,7 @@ include::devguide:example$logging.go[tags=creationBuiltIn]
 ----
 
 It is also possible to provide other logger implementations to [.api]`SetLogger`.
-Implementations must satisify the [.api]`cbanalytics.Logger` interface.
+Implementations must satisify the [.api]`cbinsights.Logger` interface.
 
 [source,golang,indent=0]
 ----
@@ -59,7 +59,7 @@ You might want your logging to use a popular logging framework such as logrus.
 In the following examples we show to use the SDK with a logrus logger:
 
 First we need to create our own logger that wraps the logrus logger.
-The logrus logging functions don't quite match the gocbanalytics logging interface.
+The logrus logging functions don't quite match the `gocbinsights` logging interface.
 This means that we need to do a bit of marshalling to get the data into a set of parameters that logrus can use.
 
 [source,golang,indent=0]
@@ -74,4 +74,4 @@ Next we need to create a logrus logger instance, wrap it in our own logger and t
 include::devguide:example$logging.go[tags=creation]
 ----
 
-Now all the cbanalytics logging output will go through our logger and be outputted to stdout (e.g. the terminal) in JSON.
+Now all the `cbinsights` logging output will go through our logger and be outputted to stdout (e.g. the terminal) in JSON.
