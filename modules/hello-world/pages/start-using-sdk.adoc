@@ -68,7 +68,7 @@ include::devguide:example$helloworld.go[tags=**]
 
 
 
-[[#server-asynchronous-api]]
+[[server-asynchronous-api]]
 === {async-server-api-feature-name}
 
 Operational Insights 2.2 introduced a {async-server-api-feature-name}.
