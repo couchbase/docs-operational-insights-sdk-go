@@ -1,5 +1,5 @@
-github.com/couchbase/gocbinsights v0.0.0-20261015084311-af263a2a4841 h1:Ye4p89CO3AkbjY4IeH0PXAInVUZULlHK1ZmqFh7L3ss=
-github.com/couchbase/gocbinsights v0.0.0-20261015084311-af263a2a4841/go.mod h1:V/chOvCmR9ih8s66EX2EvaaR4XOdg+4Ct5GmZV19QNw=
+github.com/couchbase/gocbinsights v1.0.1 h1:aho4IHcrwyTsj+PpBcIdAX64vuvUnE7CoW8/WaZNqCQ=
+github.com/couchbase/gocbinsights v1.0.1/go.mod h1:V/chOvCmR9ih8s66EX2EvaaR4XOdg+4Ct5GmZV19QNw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=

@@ -11,7 +11,7 @@ asciidoc:
     server_version: '8.0.3'
     ea_version: '3.0.0'
     oi_version: '3.0.0'
-    sdk_current_version: '1.0.0'
+    sdk_current_version: '1.0.1'
     sdk_dot_minor: '1.0'
     sdk_dot_major: '1.x'
     version-server: '8.0'

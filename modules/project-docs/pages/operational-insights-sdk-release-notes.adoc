@@ -26,24 +26,25 @@ We always recommend using the latest version of the SDK -- it contains all of th
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
 
+[[v1.0.1]]
+=== Version 1.0.1 (20 October 2026)
 
+==== New Features and Behavioral Changes
 
+* https://jira.issues.couchbase.com/browse/GOCO-58[GOCO-58]: The SDK's HTTP client now rejects all redirects and fast-fails instead.
 
-== Go Analytics SDK 1.0 Releases
+==== Fixed Issues
 
+* https://jira.issues.couchbase.com/browse/GOCO-59[GOCO-59]:
+Fixed an issue where request URLs for IPv6 hosts were built without surrounding the address in square brackets (e.g. `::1:55908` instead of `[::1]:55908`).
+This caused connections to fail when the application's `go.mod` declared Go 1.26 or newer, since `urlstrictcolons=1` is the default from Go 1.26 (see https://go.dev/doc/godebug#go-126[Go 1.26 GODEBUG settings]).
 
 [[v1.0.0]]
 === Version 1.0.0 (15 October 2026)
 
-
-
-
-
-
-
-
-
 https://pkg.go.dev/github.com/couchbase/gocbinsights[API Reference]
+
+This is the first General Availability (GA) release of the new Operational Insights Go SDK.
 // end::all[]
 
 
